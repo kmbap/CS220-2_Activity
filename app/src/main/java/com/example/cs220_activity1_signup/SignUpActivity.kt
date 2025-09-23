@@ -94,7 +94,7 @@ class SignUpActivity : AppCompatActivity() {
 
         // Submit Form
         btnSignUp.setOnClickListener {
-            var hasError: Boolean = false
+            var hasError = false
 
             val name = etFullName.text.toString()
             val email = etEmail.text.toString()
@@ -105,27 +105,27 @@ class SignUpActivity : AppCompatActivity() {
             if (name.isEmpty() || email.isEmpty() || pass.isEmpty() || cpass.isEmpty() || bdate.isEmpty() || rgGender.checkedRadioButtonId == -1) {
                 Toast.makeText(this, R.string.err_required_fields, Toast.LENGTH_LONG).show()
                 return@setOnClickListener
-            } else if (!isEmailValid(email)) {
+            }
+            if (!isEmailValid(email)) {
                 tvErrEmail.visibility = View.VISIBLE
                 hasError = true
-            } else if (!isPassValid(pass)) {
+            } else tvErrEmail.visibility = View.GONE
+
+            if (!isPassValid(pass)) {
                 tvErrPass.visibility = View.VISIBLE
                 hasError = true
-            } else if (cpass != pass) {
+            } else tvErrPass.visibility = View.GONE
+
+            if (cpass != pass) {
                 tvErrPassMatch.visibility = View.VISIBLE
                 hasError = true
-            }
+            } else tvErrPassMatch.visibility = View.GONE
 
 
             if (hasError) {
                 Toast.makeText(this, R.string.err_invalid_input, Toast.LENGTH_LONG).show()
                 return@setOnClickListener
-            } else {
-                tvErrEmail.visibility = View.GONE
-                tvErrPass.visibility = View.GONE
-                tvErrPassMatch.visibility = View.GONE
-                Toast.makeText(this, R.string.new_acc_created, Toast.LENGTH_LONG).show()
-            }
+            } else Toast.makeText(this, R.string.new_acc_created, Toast.LENGTH_LONG).show()
         }
     }
 
