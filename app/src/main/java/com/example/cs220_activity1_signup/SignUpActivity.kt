@@ -9,7 +9,6 @@ import android.view.View
 import android.widget.*
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.view.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -32,8 +31,6 @@ class SignUpActivity : AppCompatActivity() {
         val tvErrEmail = findViewById<TextView>(R.id.tvErrEmail)
 
         val rgGender = findViewById<RadioGroup>(R.id.rgGender)
-        val genderID = rgGender.checkedRadioButtonId
-
         val etBirthdate = findViewById<EditText>(R.id.etBirthdate)
 
         val etPassword = findViewById<EditText>(R.id.etPassword)
@@ -97,6 +94,8 @@ class SignUpActivity : AppCompatActivity() {
 
         // Submit Form
         btnSignUp.setOnClickListener {
+            var hasError: Boolean = false
+
             val name = etFullName.text.toString()
             val email = etEmail.text.toString()
             val bdate = etBirthdate.text.toString()
@@ -106,7 +105,27 @@ class SignUpActivity : AppCompatActivity() {
             if (name.isEmpty() || email.isEmpty() || pass.isEmpty() || cpass.isEmpty() || bdate.isEmpty() || rgGender.checkedRadioButtonId == -1) {
                 Toast.makeText(this, R.string.err_required_fields, Toast.LENGTH_LONG).show()
                 return@setOnClickListener
-            } else Toast.makeText(this, R.string.new_acc_created, Toast.LENGTH_LONG).show()
+            } else if (!isEmailValid(email)) {
+                tvErrEmail.visibility = View.VISIBLE
+                hasError = true
+            } else if (!isPassValid(pass)) {
+                tvErrPass.visibility = View.VISIBLE
+                hasError = true
+            } else if (cpass != pass) {
+                tvErrPassMatch.visibility = View.VISIBLE
+                hasError = true
+            }
+
+
+            if (hasError) {
+                Toast.makeText(this, R.string.err_invalid_input, Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            } else {
+                tvErrEmail.visibility = View.GONE
+                tvErrPass.visibility = View.GONE
+                tvErrPassMatch.visibility = View.GONE
+                Toast.makeText(this, R.string.new_acc_created, Toast.LENGTH_LONG).show()
+            }
         }
     }
 

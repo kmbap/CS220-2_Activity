@@ -168,6 +168,7 @@
         android:layout_marginStart="4dp"
         android:textSize="13sp"
         android:visibility="gone"
+        android:text="@string/err_pass_empty"
         android:textColor="@android:color/holo_red_dark"
         app:layout_constraintStart_toStartOf="@+id/etCPass"
         app:layout_constraintTop_toBottomOf="@+id/etCPass" />
