@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">CS220_Activity1_SignUp</string>
+
+    <string name="err_valid_email">Please enter a valid email.</string>
+    <string name="err_required_fields">All fields are required!</string>
+    <string name="err_pass_match">Passwords do not match!</string>
+    <string name="err_pass_invalid">Password must at least have 8 characters, one digit, one uppercase, and one symbol.</string>
+    <string name="err_pass_empty">Please fill in this field.</string>
+    <string name="err_gender_sel">Please select your gender.</string>
+
+    <string name="new_acc_created">Account created successfully!</string>
+</resources>
