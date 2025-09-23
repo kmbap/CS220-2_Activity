@@ -24,7 +24,7 @@
     <EditText
         android:id="@+id/etFullName"
         android:layout_width="255dp"
-        android:layout_height="41dp"
+        android:layout_height="48dp"
         android:layout_marginTop="75dp"
         android:ems="10"
         android:hint="Full Name"
@@ -36,7 +36,7 @@
     <EditText
         android:id="@+id/etEmail"
         android:layout_width="255dp"
-        android:layout_height="41dp"
+        android:layout_height="48dp"
         android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="Email"
@@ -60,7 +60,7 @@
     <RadioGroup
         android:id="@+id/rgGender"
         android:layout_width="255dp"
-        android:layout_height="41dp"
+        android:layout_height="48dp"
         android:layout_marginTop="10dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -106,7 +106,7 @@
     <EditText
         android:id="@+id/etUsername"
         android:layout_width="255dp"
-        android:layout_height="41dp"
+        android:layout_height="48dp"
         android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="Username"
@@ -118,7 +118,7 @@
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="210dp"
-        android:layout_height="41dp"
+        android:layout_height="48dp"
         android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="Password"
@@ -130,8 +130,8 @@
 
     <CheckBox
         android:id="@+id/cbPass"
-        android:layout_width="38dp"
-        android:layout_height="32dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:button="@drawable/pass_view"
         app:layout_constraintBottom_toBottomOf="@+id/etPassword"
         app:layout_constraintEnd_toEndOf="@+id/etUsername"
@@ -152,7 +152,7 @@
     <EditText
         android:id="@+id/etCPass"
         android:layout_width="255dp"
-        android:layout_height="41dp"
+        android:layout_height="48dp"
         android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="Confirm Password"
