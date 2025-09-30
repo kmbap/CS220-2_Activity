@@ -1,17 +1,19 @@
 package com.example.cs220_activity1_signup
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.text.method.*
-import android.util.Patterns
+import android.util.*
 import android.view.View
 import android.widget.*
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.*
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Locale
+import androidx.core.content.edit
 
 class SignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +35,9 @@ class SignUpActivity : AppCompatActivity() {
         val rgGender = findViewById<RadioGroup>(R.id.rgGender)
         val etBirthdate = findViewById<EditText>(R.id.etBirthdate)
 
+        val etUsername = findViewById<EditText>(R.id.etUsername)
+        val tvErrUsername = findViewById<TextView>(R.id.tvErrUsername)
+
         val etPassword = findViewById<EditText>(R.id.etPassword)
         val cbPassword = findViewById<CheckBox>(R.id.cbPass)
         val tvErrPass = findViewById<TextView>(R.id.tvErrPass)
@@ -41,6 +46,8 @@ class SignUpActivity : AppCompatActivity() {
         val tvErrPassMatch = findViewById<TextView>(R.id.tvErrPassMatch)
 
         val btnSignUp = findViewById<Button>(R.id.btnSignUp)
+
+        val tvLoginPage = findViewById<TextView>(R.id.tvLoginPage)
 
         // Verifies Email
         etEmail.onFocusChangeListener = View.OnFocusChangeListener {view, hasFocus ->
@@ -51,6 +58,20 @@ class SignUpActivity : AppCompatActivity() {
                     tvErrEmail.visibility = View.GONE
                 } else tvErrEmail.visibility = View.VISIBLE
             } else tvErrEmail.visibility = View.GONE
+        }
+
+        // Verifies Username
+        etUsername.onFocusChangeListener = View.OnFocusChangeListener {view, hasFocus ->
+            val username = etUsername.text.toString()
+
+            val user = getSharedPreferences("users", MODE_PRIVATE)
+            val cUsername = user.getString(username + "_username", "")
+
+            if (!hasFocus) {
+                if (username != cUsername) {
+                    tvErrUsername.visibility = View.GONE
+                } else tvErrUsername.visibility = View.VISIBLE
+            } else tvErrUsername.visibility = View.GONE
         }
 
         // Display Calendar
@@ -92,20 +113,30 @@ class SignUpActivity : AppCompatActivity() {
             } else tvErrPassMatch.visibility = View.GONE
         }
 
-        // Submit Form
+        // Form Submission
         btnSignUp.setOnClickListener {
             var hasError = false
 
             val name = etFullName.text.toString()
             val email = etEmail.text.toString()
             val bdate = etBirthdate.text.toString()
+            val username = etUsername.text.toString()
             val pass = etPassword.text.toString()
             val cpass = etCPass.text.toString()
 
-            if (name.isEmpty() || email.isEmpty() || pass.isEmpty() || cpass.isEmpty() || bdate.isEmpty() || rgGender.checkedRadioButtonId == -1) {
+            val user = getSharedPreferences("users", MODE_PRIVATE)
+            val cUsername = user.getString(username + "_username", "")
+
+            if (name.isEmpty() || email.isEmpty() || bdate.isEmpty() || username.isEmpty() || pass.isEmpty() || cpass.isEmpty() || rgGender.checkedRadioButtonId == -1) {
                 Toast.makeText(this, R.string.err_required_fields, Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
+
+            if (username == cUsername) {
+                tvErrUsername.visibility = View.VISIBLE
+                hasError = true
+            } else tvErrUsername.visibility = View.GONE
+
             if (!isEmailValid(email)) {
                 tvErrEmail.visibility = View.VISIBLE
                 hasError = true
@@ -125,7 +156,25 @@ class SignUpActivity : AppCompatActivity() {
             if (hasError) {
                 Toast.makeText(this, R.string.err_invalid_input, Toast.LENGTH_LONG).show()
                 return@setOnClickListener
-            } else Toast.makeText(this, R.string.new_acc_created, Toast.LENGTH_LONG).show()
+            } else {
+                val user = getSharedPreferences("users", MODE_PRIVATE)
+
+                user.edit {
+                    putString(username + "_name", name)
+                    putString(username + "_email", email)
+                    putString(username + "_gender", getGender(rgGender.checkedRadioButtonId))
+                    putString(username + "_bdate", bdate)
+                    putString(username + "_username", username)
+                    putString(username + "_pass", pass)
+                }
+                Toast.makeText(this, R.string.new_acc_created, Toast.LENGTH_LONG).show()
+                redirectPage(LoginActivity::class.java)
+            }
+        }
+
+        // Redirects to Login Page
+        tvLoginPage.setOnClickListener {
+            redirectPage(LoginActivity::class.java)
         }
     }
 
@@ -159,5 +208,16 @@ class SignUpActivity : AppCompatActivity() {
             day
         )
         datePickerDialog.show()
+    }
+
+    private fun getGender(gender: Int): String = when (gender) {
+        R.id.rbMale -> "Male"
+        R.id.rbFemale -> "Female"
+        R.id.rbOther -> "Other"
+        else -> ""
+    }
+
+    private fun redirectPage(target: Class<*>) {
+        startActivity(Intent(this@SignUpActivity, target))
     }
 }
