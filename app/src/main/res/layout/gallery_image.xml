@@ -41,7 +41,7 @@
                 android:padding="4dp"
                 android:singleLine="true"
                 android:textColor="@android:color/white"
-                android:textSize="17sp"
+                android:textSize="15sp"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@+id/ivImage"
                 app:layout_constraintEnd_toEndOf="@+id/ivImage"

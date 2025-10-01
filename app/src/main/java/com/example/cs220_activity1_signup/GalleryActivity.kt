@@ -32,12 +32,15 @@ class GalleryActivity : AppCompatActivity() {
                 , "Sniffy Cady", "Tuesday, May 20, 2025 | 21:29:27"),
             GalleryImage(R.drawable.dacy_1, "Goofy Dacy", "Tuesday, May 20, 2025 | 21:36:21"),
             GalleryImage(R.drawable.lucy_1, "Cutie Lucy", "Tuesday, May 20, 2025 | 21:27:47"),
-            GalleryImage(R.drawable.rakki_1, "Sniff sniff", "Tuesday, May 20, 2025 | 21:26:31"),
+            GalleryImage(R.drawable.rakki_1, "Confused Rakki", "Tuesday, May 20, 2025 | 21:26:31"),
         )
 
         rvImageGallery.layoutManager = GridLayoutManager(this, 2)
 
-        galleryAdapter = GalleryAdapter(galleryImages)
+        galleryAdapter = GalleryAdapter(galleryImages) { clickedImage ->
+            val modal = ImageDetailView(clickedImage.imgResId, clickedImage.title, clickedImage.createdAt)
+            modal.show(supportFragmentManager, "ImageDetailView")
+        }
         rvImageGallery.adapter = galleryAdapter
     }
 }

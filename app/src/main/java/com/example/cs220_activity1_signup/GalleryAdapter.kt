@@ -7,7 +7,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class GalleryAdapter(private val imageList: List<GalleryImage>): RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
+class GalleryAdapter(
+    private val imageList: List<GalleryImage>,
+    private val onImageClick: (GalleryImage) -> Unit)
+    : RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
     class ViewHolder(imageView: View): RecyclerView.ViewHolder(imageView) {
         val ivImage: ImageView = imageView.findViewById(R.id.ivImage)
         val tvDesc: TextView = imageView.findViewById(R.id.tvDesc)
@@ -27,6 +30,10 @@ class GalleryAdapter(private val imageList: List<GalleryImage>): RecyclerView.Ad
             val width = holder.ivImage.width
             holder.ivImage.layoutParams.height = width
             holder.ivImage.requestLayout()
+        }
+
+        holder.ivImage.setOnClickListener {
+            onImageClick(image)
         }
     }
 

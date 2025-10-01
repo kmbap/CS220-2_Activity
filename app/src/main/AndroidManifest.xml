@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CS220_Activity1_SignUp">
         <activity
+            android:name=".ImageViewActivity"
+            android:exported="false" />
+        <activity
             android:name=".GalleryActivity"
             android:exported="true">
             <intent-filter>
