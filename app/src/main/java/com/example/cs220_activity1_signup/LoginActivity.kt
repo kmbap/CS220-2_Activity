@@ -76,9 +76,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         // Redirects to Sign Up Page
-        tvSignUpPage.setOnClickListener {
-            redirectPage(SignUpActivity::class.java)
-        }
+        tvSignUpPage.setOnClickListener {redirectPage(SignUpActivity::class.java)}
     }
 
     private fun redirectPage(target: Class<*>) = startActivity(Intent(this@LoginActivity, target))

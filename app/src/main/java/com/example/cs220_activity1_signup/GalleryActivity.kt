@@ -1,6 +1,8 @@
 package com.example.cs220_activity1_signup
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ToggleButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -29,8 +31,10 @@ class GalleryActivity : AppCompatActivity() {
 
         // Variables
         rvImageGallery = findViewById<RecyclerView>(R.id.rvImageGallery)
+
         switchLayout = findViewById<SwitchCompat>(R.id.switchLayout)
         val tbtnDesc = findViewById<ToggleButton>(R.id.tbtnDesc)
+        val btnLogout = findViewById<Button>(R.id.btnLogout)
 
         // Images
         galleryImages = listOf(
@@ -77,5 +81,8 @@ class GalleryActivity : AppCompatActivity() {
 
             galleryAdapter.notifyDataSetChanged()
         }
+
+        // Redirects To Login Page
+        btnLogout.setOnClickListener {startActivity(Intent(this@GalleryActivity, LoginActivity::class.java))}
     }
 }

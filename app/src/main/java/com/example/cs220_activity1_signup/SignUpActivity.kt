@@ -173,9 +173,7 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         // Redirects to Login Page
-        tvLoginPage.setOnClickListener {
-            redirectPage(LoginActivity::class.java)
-        }
+        tvLoginPage.setOnClickListener {redirectPage(LoginActivity::class.java)}
     }
 
     private fun isEmailValid(email: String): Boolean = Patterns.EMAIL_ADDRESS.matcher(email).matches()
