@@ -10,11 +10,13 @@ class GalleryAdapter(
     : RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
 
         var showDesc: Boolean = false
+        var showImg: Boolean = false
 
     // References UI Elements
     class ViewHolder(imageView: View): RecyclerView.ViewHolder(imageView) {
         val ivImage: ImageView = imageView.findViewById(R.id.ivImage)
         val tvDesc: TextView = imageView.findViewById(R.id.tvDesc)
+        val pbarLoading: ProgressBar = imageView.findViewById(R.id.pbarLoading)
     }
 
     // Sets Layout Of UI Elements
@@ -28,6 +30,19 @@ class GalleryAdapter(
         val image = imageList[position]
         holder.ivImage.setImageResource(image.imgResId)
         holder.tvDesc.text = image.title
+
+        holder.pbarLoading.visibility = View.VISIBLE
+
+        if (showImg) {
+            holder.ivImage.visibility = View.VISIBLE
+            holder.pbarLoading.visibility = View.GONE
+        } else holder.ivImage.visibility = View.INVISIBLE
+
+        holder.ivImage.postDelayed({
+            holder.pbarLoading.visibility = View.GONE
+            holder.ivImage.visibility = View.VISIBLE
+            showImg = true
+        }, 2000)
 
         holder.ivImage.post {
             val width = holder.ivImage.width

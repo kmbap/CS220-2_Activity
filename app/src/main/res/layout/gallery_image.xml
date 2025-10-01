@@ -49,6 +49,17 @@
                 app:layout_constraintEnd_toEndOf="@+id/ivImage"
                 app:layout_constraintStart_toStartOf="@+id/ivImage" />
 
+            <ProgressBar
+                android:id="@+id/pbarLoading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@+id/ivImage"
+                app:layout_constraintEnd_toEndOf="@+id/ivImage"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/ivImage" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </FrameLayout>
