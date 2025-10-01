@@ -11,12 +11,15 @@ class ImageDetailView(
     private val title: String,
     private val created: String)
     : DialogFragment() {
+
+        // Creates Modal Window
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val modal = super.onCreateDialog(savedInstanceState)
         modal.window?.setBackgroundDrawableResource(R.color.arcW)
         return modal
     }
 
+    // Lays Out UI Elements
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

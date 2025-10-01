@@ -11,16 +11,19 @@ class GalleryAdapter(
 
         var showDesc: Boolean = false
 
+    // References UI Elements
     class ViewHolder(imageView: View): RecyclerView.ViewHolder(imageView) {
         val ivImage: ImageView = imageView.findViewById(R.id.ivImage)
         val tvDesc: TextView = imageView.findViewById(R.id.tvDesc)
     }
 
+    // Sets Layout Of UI Elements
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.gallery_image_grid, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.gallery_image, parent, false)
         return ViewHolder(view)
     }
 
+    // Sets Values of UI Elements
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val image = imageList[position]
         holder.ivImage.setImageResource(image.imgResId)

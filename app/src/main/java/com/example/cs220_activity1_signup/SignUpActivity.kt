@@ -179,7 +179,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun isEmailValid(email: String): Boolean = Patterns.EMAIL_ADDRESS.matcher(email).matches()
-    //
+
     private fun isPassValid(pass: String): Boolean {
         if (pass.length < 8) return false
         if (!pass.any {it.isUpperCase()}) return false
