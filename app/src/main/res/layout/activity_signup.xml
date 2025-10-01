@@ -72,21 +72,21 @@
             android:layout_width="84dp"
             android:layout_height="wrap_content"
             android:text="Male"
-            app:buttonTint="@drawable/radio_tint" />
+            app:buttonTint="@color/radio_tint" />
 
         <RadioButton
             android:id="@+id/rbFemale"
             android:layout_width="89dp"
             android:layout_height="wrap_content"
             android:text="Female"
-            app:buttonTint="@drawable/radio_tint"/>
+            app:buttonTint="@color/radio_tint"/>
 
         <RadioButton
             android:id="@+id/rbOther"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="Other"
-            app:buttonTint="@drawable/radio_tint"/>
+            app:buttonTint="@color/radio_tint"/>
     </RadioGroup>
 
     <EditText

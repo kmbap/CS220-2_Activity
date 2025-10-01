@@ -1,17 +1,21 @@
 package com.example.cs220_activity1_signup
 
 import android.os.Bundle
+import android.widget.ToggleButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.appcompat.widget.SwitchCompat
+import androidx.core.content.ContextCompat
+import androidx.core.view.*
+import androidx.recyclerview.widget.*
 
 class GalleryActivity : AppCompatActivity() {
-    private lateinit var rvGallery: RecyclerView
+    private lateinit var rvImageGallery: RecyclerView
     private lateinit var galleryAdapter: GalleryAdapter
     private lateinit var galleryImages: List<GalleryImage>
+    private lateinit var switchLayout: SwitchCompat
+    private lateinit var lmGrid: GridLayoutManager
+    private lateinit var lmList: LinearLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,8 +27,12 @@ class GalleryActivity : AppCompatActivity() {
             insets
         }
 
-        val rvImageGallery = findViewById<RecyclerView>(R.id.rvImageGallery)
+        // Variables
+        rvImageGallery = findViewById<RecyclerView>(R.id.rvImageGallery)
+        switchLayout = findViewById<SwitchCompat>(R.id.switchLayout)
+        val tbtnDesc = findViewById<ToggleButton>(R.id.tbtnDesc)
 
+        // Images
         galleryImages = listOf(
             GalleryImage(R.drawable.cady_1, "Happy Cady", "Tuesday, May 20, 2025 | 21:29:21"),
             GalleryImage(R.drawable.cady_2, "Eepy Cady", "Tuesday, May 20, 2025 | 21:24:28"),
@@ -35,12 +43,39 @@ class GalleryActivity : AppCompatActivity() {
             GalleryImage(R.drawable.rakki_1, "Confused Rakki", "Tuesday, May 20, 2025 | 21:26:31"),
         )
 
-        rvImageGallery.layoutManager = GridLayoutManager(this, 2)
+        // Layout Managers
+        lmGrid = GridLayoutManager(this, 2)
+        lmList = LinearLayoutManager(this)
+
+        // Image Layout
+        rvImageGallery.layoutManager = lmGrid
 
         galleryAdapter = GalleryAdapter(galleryImages) { clickedImage ->
             val modal = ImageDetailView(clickedImage.imgResId, clickedImage.title, clickedImage.createdAt)
             modal.show(supportFragmentManager, "ImageDetailView")
         }
         rvImageGallery.adapter = galleryAdapter
+
+        // Switch Colors & Listener
+        switchLayout.thumbTintList = ContextCompat.getColorStateList(this, R.color.switch_thumb)
+        switchLayout.trackTintList = ContextCompat.getColorStateList(this, R.color.arc3)
+
+        switchLayout.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                rvImageGallery.layoutManager = lmList
+                switchLayout.text = "Grid"
+            } else {
+                rvImageGallery.layoutManager = lmGrid
+                switchLayout.text = "List"
+            }
+        }
+
+        // Toggle Button Listener
+        tbtnDesc.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) galleryAdapter.showDesc = true
+            else galleryAdapter.showDesc = false
+
+            galleryAdapter.notifyDataSetChanged()
+        }
     }
 }

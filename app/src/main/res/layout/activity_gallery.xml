@@ -9,14 +9,42 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvImageGallery"
-        android:layout_width="400dp"
-        android:layout_height="594dp"
-        android:padding="2dp"
+        android:layout_width="398dp"
+        android:layout_height="767dp"
         android:clipToPadding="false"
+        android:padding="2dp"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.700" />
+
+    <ToggleButton
+        android:id="@+id/tbtnDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginBottom="4dp"
+        android:backgroundTint="@color/switch_thumb"
+        android:checked="false"
+        android:textColor="@color/tbtn_text"
+        android:textOff="Show Desc"
+        android:textOn="Hide Desc"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/rvImageGallery"
+        app:layout_constraintStart_toStartOf="@+id/rvImageGallery" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switchLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="List"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/rvImageGallery"
+        app:layout_constraintEnd_toEndOf="@+id/rvImageGallery"
+        app:thumbTint="@color/switch_thumb"
+        app:trackTint="@color/arc3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
