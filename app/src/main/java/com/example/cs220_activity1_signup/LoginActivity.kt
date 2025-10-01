@@ -81,7 +81,5 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun redirectPage(target: Class<*>) {
-        startActivity(Intent(this@LoginActivity, target))
-    }
+    private fun redirectPage(target: Class<*>) = startActivity(Intent(this@LoginActivity, target))
 }

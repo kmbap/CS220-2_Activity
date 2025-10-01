@@ -217,7 +217,5 @@ class SignUpActivity : AppCompatActivity() {
         else -> ""
     }
 
-    private fun redirectPage(target: Class<*>) {
-        startActivity(Intent(this@SignUpActivity, target))
-    }
+    private fun redirectPage(target: Class<*>) = startActivity(Intent(this@SignUpActivity, target))
 }
