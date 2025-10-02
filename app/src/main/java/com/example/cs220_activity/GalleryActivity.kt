@@ -1,4 +1,4 @@
-package com.example.cs220_activity1_signup
+package com.example.cs220_activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -40,13 +40,13 @@ class GalleryActivity : AppCompatActivity() {
         galleryImages = listOf(
             GalleryImage(R.drawable.cady_1, "Happy Cady", "Tuesday, May 20, 2025 | 21:29:21"),
             GalleryImage(R.drawable.cady_2, "Eepy Cady", "Tuesday, May 20, 2025 | 21:24:28"),
-            GalleryImage(R.drawable.cady_3
-                , "Sniffy Cady", "Tuesday, May 20, 2025 | 21:29:27"),
+            GalleryImage(R.drawable.yuumi_1
+                , "Elegant Yuumi", "Tuesday, May 20, 2025 | 21:29:27"),
             GalleryImage(R.drawable.dacy_1, "Goofy Dacy", "Tuesday, May 20, 2025 | 21:36:21"),
             GalleryImage(R.drawable.lucy_1, "Cutie Lucy", "Tuesday, May 20, 2025 | 21:27:47"),
             GalleryImage(R.drawable.rakki_1, "Confused Rakki", "Tuesday, May 20, 2025 | 21:26:31"),
             GalleryImage(R.drawable.ming_1, "The Creation of Ming", "Tuesday, May 20, 2025 | 21:29:21"),
-            GalleryImage(R.drawable.ming_2, "Eepy Ming", "Tuesday, May 20, 2025 | 21:24:28"),
+            GalleryImage(R.drawable.chachi_1, "Hiding Chachi", "Tuesday, May 20, 2025 | 21:24:28"),
             GalleryImage(R.drawable.dacy_2
                 , "Weirdo Dacy", "Tuesday, May 20, 2025 | 21:29:27"),
             GalleryImage(R.drawable.umi_1, "Shy Umi", "Tuesday, May 20, 2025 | 21:36:21"),
@@ -83,9 +83,7 @@ class GalleryActivity : AppCompatActivity() {
 
         // Toggle Button Listener
         tbtnDesc.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) galleryAdapter.showDesc = true
-            else galleryAdapter.showDesc = false
-
+            galleryAdapter.showDesc = isChecked
             galleryAdapter.notifyDataSetChanged()
         }
 

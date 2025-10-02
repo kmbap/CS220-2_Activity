@@ -10,12 +10,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.CS220_Activity1_SignUp">
+        android:theme="@style/Theme.CS220_Activity">
         <activity
-            android:name=".ImageViewActivity"
-            android:exported="false" />
-        <activity
-            android:name=".GalleryActivity"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,7 +30,7 @@
             android:name=".DashboardActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".GalleryActivity"
             android:exported="false" />
     </application>
 

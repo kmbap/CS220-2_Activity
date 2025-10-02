@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.cs220_activity1_signup"
+    namespace = "com.example.cs220_activity"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.cs220_activity1_signup"
+        applicationId = "com.example.cs220_activity"
         minSdk = 30
         targetSdk = 36
         versionCode = 1

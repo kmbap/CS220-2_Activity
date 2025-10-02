@@ -1,4 +1,4 @@
-package com.example.cs220_activity1_signup
+package com.example.cs220_activity
 
 data class GalleryImage(
     val imgResId: Int,

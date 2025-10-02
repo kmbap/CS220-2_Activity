@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "CS220_Activity1_SignUp"
+rootProject.name = "CS220_Activity"
 include(":app")
