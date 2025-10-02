@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class GalleryAdapter(
     private var imageList: List<GalleryImage>,
-    private val onImageClick: (GalleryImage) -> Unit)
+    private val onImageClick: (Int) -> Unit)
     : RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
 
         var showDesc: Boolean = false
@@ -51,7 +51,7 @@ class GalleryAdapter(
         }
 
         holder.ivImage.setOnClickListener {
-            onImageClick(image)
+            onImageClick(position)
         }
 
         holder.tvDesc.visibility = if (showDesc) View.VISIBLE else View.INVISIBLE

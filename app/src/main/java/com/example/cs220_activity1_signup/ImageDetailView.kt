@@ -7,9 +7,8 @@ import android.widget.*
 import androidx.fragment.app.DialogFragment
 
 class ImageDetailView(
-    private val imgResId: Int,
-    private val title: String,
-    private val created: String)
+    private val images: List<GalleryImage>,
+    private var cIndex: Int)
     : DialogFragment() {
 
         // Creates Modal Window
@@ -31,15 +30,34 @@ class ImageDetailView(
         val tvTitle = view.findViewById<TextView>(R.id.tvTitle)
         val tvCreated = view.findViewById<TextView>(R.id.tvCreated)
 
+        val sbNavigate = view.findViewById<SeekBar>(R.id.sbNavigate)
+
         val ibtnClose = view.findViewById<ImageButton>(R.id.ibtnClose)
 
-        ivImg.setImageResource(imgResId)
-        tvTitle.text = title
-        tvCreated.text = created
+        sbNavigate.max = images.size - 1
+        sbNavigate.progress = cIndex
 
-        ibtnClose.setOnClickListener {
-            dismiss()
+        fun showImg (index: Int) {
+            val img = images[index]
+            ivImg.setImageResource(img.imgResId)
+            tvTitle.text = img.title
+            tvCreated.text = img.createdAt
         }
+        showImg(cIndex)
+
+        sbNavigate.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                if (fromUser) {
+                    cIndex = progress
+                    showImg(cIndex)
+                }
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+        })
+
+        ibtnClose.setOnClickListener { dismiss() }
 
         return view
     }

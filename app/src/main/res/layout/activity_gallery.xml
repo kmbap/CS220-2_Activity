@@ -9,8 +9,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvImageGallery"
-        android:layout_width="400dp"
-        android:layout_height="725dp"
+        android:layout_width="393dp"
+        android:layout_height="712dp"
         android:clipToPadding="false"
         android:padding="2dp"
         android:scrollbars="vertical"

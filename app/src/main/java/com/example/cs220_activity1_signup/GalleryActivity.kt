@@ -30,9 +30,9 @@ class GalleryActivity : AppCompatActivity() {
         }
 
         // Variables
-        rvImageGallery = findViewById<RecyclerView>(R.id.rvImageGallery)
+        rvImageGallery = findViewById(R.id.rvImageGallery)
 
-        switchLayout = findViewById<SwitchCompat>(R.id.switchLayout)
+        switchLayout = findViewById(R.id.switchLayout)
         val tbtnDesc = findViewById<ToggleButton>(R.id.tbtnDesc)
         val btnLogout = findViewById<Button>(R.id.btnLogout)
 
@@ -45,6 +45,13 @@ class GalleryActivity : AppCompatActivity() {
             GalleryImage(R.drawable.dacy_1, "Goofy Dacy", "Tuesday, May 20, 2025 | 21:36:21"),
             GalleryImage(R.drawable.lucy_1, "Cutie Lucy", "Tuesday, May 20, 2025 | 21:27:47"),
             GalleryImage(R.drawable.rakki_1, "Confused Rakki", "Tuesday, May 20, 2025 | 21:26:31"),
+            GalleryImage(R.drawable.ming_1, "The Creation of Ming", "Tuesday, May 20, 2025 | 21:29:21"),
+            GalleryImage(R.drawable.ming_2, "Eepy Ming", "Tuesday, May 20, 2025 | 21:24:28"),
+            GalleryImage(R.drawable.dacy_2
+                , "Weirdo Dacy", "Tuesday, May 20, 2025 | 21:29:27"),
+            GalleryImage(R.drawable.umi_1, "Shy Umi", "Tuesday, May 20, 2025 | 21:36:21"),
+            GalleryImage(R.drawable.luca_1, "Side Eye Luca", "Tuesday, May 20, 2025 | 21:27:47"),
+            GalleryImage(R.drawable.dacy_3, "Pretty Dacy", "Tuesday, May 20, 2025 | 21:26:31")
         )
 
         // Layout Managers
@@ -54,8 +61,8 @@ class GalleryActivity : AppCompatActivity() {
         // Image Layout
         rvImageGallery.layoutManager = lmGrid
 
-        galleryAdapter = GalleryAdapter(galleryImages) { clickedImage ->
-            val modal = ImageDetailView(clickedImage.imgResId, clickedImage.title, clickedImage.createdAt)
+        galleryAdapter = GalleryAdapter(galleryImages) { position ->
+            val modal = ImageDetailView(galleryImages, position)
             modal.show(supportFragmentManager, "ImageDetailView")
         }
         rvImageGallery.adapter = galleryAdapter
