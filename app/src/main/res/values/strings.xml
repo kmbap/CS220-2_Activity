@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CS220_Activity1_SignUp</string>
+    <string name="app_name">CS220-2_Activity</string>
 
     <string name="err_valid_email">Please enter a valid email.</string>
     <string name="err_required_fields">All fields are required!</string>
