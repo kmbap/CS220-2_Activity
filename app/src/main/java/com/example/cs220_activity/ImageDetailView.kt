@@ -11,14 +11,15 @@ class ImageDetailView(
     private var cIndex: Int)
     : DialogFragment() {
 
-        // Creates Modal Window
+    // Creates modal window
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val modal = super.onCreateDialog(savedInstanceState)
         modal.window?.setBackgroundDrawableResource(R.color.arcW)
         return modal
     }
 
-    // Lays Out UI Elements
+    // Determines layout and position of elements based on layout file
+    // Puts data into UI elements and handles interactions
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,6 +35,7 @@ class ImageDetailView(
 
         val ibtnClose = view.findViewById<ImageButton>(R.id.ibtnClose)
 
+        // Images Navigator
         sbNavigate.max = images.size - 1
         sbNavigate.progress = cIndex
 

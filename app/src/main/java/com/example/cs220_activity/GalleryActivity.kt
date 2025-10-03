@@ -2,7 +2,7 @@ package com.example.cs220_activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ToggleButton
+import android.widget.*
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
@@ -23,11 +23,14 @@ class GalleryActivity : AppCompatActivity() {
             insets
         }
 
+        // Variables
         val viewPager = findViewById<ViewPager2>(R.id.vpPager)
         val switchLayout = findViewById<SwitchCompat>(R.id.switchLayout)
         val tbtnDesc = findViewById<ToggleButton>(R.id.tbtnDesc)
         val bnavMenu = findViewById<BottomNavigationView>(R.id.bnavMenu)
+        val pbPages = findViewById<ProgressBar>(R.id.pbPageProgress)
 
+        // Gallery Images
         val galleryImages = listOf(
             GalleryImage(R.drawable.cady_1, "Happy Cady", "Tuesday, May 20, 2025 | 21:29:21"),
             GalleryImage(R.drawable.cady_2, "Eepy Cady", "Tuesday, May 20, 2025 | 21:24:28"),
@@ -43,12 +46,26 @@ class GalleryActivity : AppCompatActivity() {
             GalleryImage(R.drawable.dacy_3, "Pretty Dacy", "Tuesday, May 20, 2025 | 21:26:31")
         )
 
+        // Connect the images to the layout
         val galleryPageAdapter = GalleryPageAdapter(galleryImages) { position ->
             val modal = ImageDetailView(galleryImages, position)
             modal.show(supportFragmentManager, "ImageDetailView")
         }
         viewPager.adapter = galleryPageAdapter
 
+        // Gallery Page Progress
+        val pageCount = galleryPageAdapter.itemCount
+        val progressMax = if (pageCount > 1) pageCount - 1 else 0
+        pbPages.max = progressMax
+        pbPages.progress = viewPager.currentItem.coerceAtMost(progressMax)
+
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                pbPages.progress = position.coerceAtMost(pbPages.max)
+            }
+        })
+
+        // Switch Grid-List Layout
         switchLayout.thumbTintList = ContextCompat.getColorStateList(this, R.color.switch_thumb)
         switchLayout.trackTintList = ContextCompat.getColorStateList(this, R.color.arc3)
 
@@ -57,14 +74,17 @@ class GalleryActivity : AppCompatActivity() {
 
         switchLayout.setOnCheckedChangeListener { _, isChecked ->
             galleryPageAdapter.setListLayout(isChecked)
+            tbtnDesc.isChecked = false
         }
 
+        // Toggle Show-Hide Image Descriptions
         tbtnDesc.setOnCheckedChangeListener { _, isChecked ->
             (viewPager.adapter as? GalleryPageAdapter)?.let {
                 it.showDescOnAllPages(isChecked)
             }
         }
 
+        // Bottom NavBar Menu
         bnavMenu.selectedItemId = R.id.bnavGallery
         bnavMenu.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {

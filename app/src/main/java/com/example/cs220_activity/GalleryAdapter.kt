@@ -10,6 +10,7 @@ class GalleryAdapter(
     private val onImageClick: (Int) -> Unit
 ) : RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
 
+    // Variables
     var showDesc: Boolean = false
     var showImg: Boolean = false
 
@@ -17,6 +18,7 @@ class GalleryAdapter(
         isListLayout = list
     }
 
+    // Determines UI elements included
     class ViewHolder(imageView: View) : RecyclerView.ViewHolder(imageView) {
         val ivImage: ImageView? = imageView.findViewById(R.id.ivImage) ?: imageView.findViewById(R.id.ivImgList)
         val tvDesc: TextView? = imageView.findViewById(R.id.tvDesc)
@@ -26,12 +28,14 @@ class GalleryAdapter(
         val pbarLoading: ProgressBar? = imageView.findViewById(R.id.pbarLoading)
     }
 
+    // Determines layout and position of elements based on layout file
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutRes = if (isListLayout) R.layout.gallery_image_list else R.layout.gallery_image
         val view = LayoutInflater.from(parent.context).inflate(layoutRes, parent, false)
         return ViewHolder(view)
     }
 
+    // Puts data into UI elements and handles interactions
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val image = imageList[position]
         holder.ivImage?.setImageResource(image.imgResId)
@@ -70,6 +74,7 @@ class GalleryAdapter(
         holder.itemView.setOnClickListener { onImageClick(position) }
     }
 
+    // Image Count
     override fun getItemCount(): Int {
         return imageList.size
     }

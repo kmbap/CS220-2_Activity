@@ -49,14 +49,17 @@ class LoginActivity : AppCompatActivity() {
             tvErrUsername.visibility = View.GONE
             tvErrPassword.visibility = View.GONE
 
+            // Variables
             val username = etUsername.text.toString()
             val password = etPassword.text.toString()
 
+            // Empty Fields
             if (username.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, R.string.err_required_fields, Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
+            // Verifies Credentials
             val user = getSharedPreferences("users", MODE_PRIVATE)
             val cUsername = user.getString(username + "_username", "")
             val cPassword = user.getString(username + "_pass", "")

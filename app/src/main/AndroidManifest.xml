@@ -12,11 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CS220_Activity" >
         <activity
-            android:name=".GalleryActivity_2"
-            android:exported="false"
-            android:label="@string/title_activity_gallery2" />
-        <activity
-            android:name=".GalleryActivity"
+            android:name=".LoginActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,7 +30,7 @@
             android:name=".DashboardActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".GalleryActivity"
             android:exported="false" />
     </application>
 

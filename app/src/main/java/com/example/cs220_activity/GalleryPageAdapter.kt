@@ -8,19 +8,23 @@ class GalleryPageAdapter(
     private val onImageClick: (Int) -> Unit
 ) : RecyclerView.Adapter<GalleryPageAdapter.PageViewHolder>() {
 
+    // Variables
     private val itemsPerPage = 6
     private val pageAdapters = mutableMapOf<Int, GalleryAdapter>()
     private var listLayout: Boolean = false
 
+    // Determines UI elements included
     inner class PageViewHolder(imageView: View) : RecyclerView.ViewHolder(imageView) {
         val pageRecyclerView: RecyclerView = imageView.findViewById(R.id.rvGalleryPage)
     }
 
+    // Determines layout and position of elements based on layout file
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PageViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.gallery_page, parent, false)
         return PageViewHolder(view)
     }
 
+    // Puts data into UI elements and handles interactions
     override fun onBindViewHolder(holder: PageViewHolder, position: Int) {
         val start = position * itemsPerPage
         val end = minOf(start + itemsPerPage, imageList.size)
@@ -37,6 +41,7 @@ class GalleryPageAdapter(
         holder.pageRecyclerView.adapter = galleryAdapter
     }
 
+    // Page Count
     override fun getItemCount(): Int {
         return (imageList.size + itemsPerPage - 1) / itemsPerPage
     }

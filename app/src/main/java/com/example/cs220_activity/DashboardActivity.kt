@@ -18,6 +18,21 @@ class DashboardActivity : AppCompatActivity() {
             insets
         }
 
+        // NavBar Template
+//        bnavMenu.selectedItemId = R.id.bnavGallery
+//        bnavMenu.setOnItemSelectedListener { menuItem ->
+//            when (menuItem.itemId) {
+//                R.id.bnavGallery -> { true }
+//                R.id.bnavLogout -> {
+//                    startActivity(Intent(this, LoginActivity::class.java).apply {
+//                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+//                    })
+//                    true
+//                }
+//                else -> false
+//            }
+//        }
+
         // Redirect to Gallery
         startActivity(Intent(this@DashboardActivity, GalleryActivity::class.java))
     }

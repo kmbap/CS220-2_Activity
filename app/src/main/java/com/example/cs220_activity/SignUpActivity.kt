@@ -49,7 +49,7 @@ class SignUpActivity : AppCompatActivity() {
 
         val tvLoginPage = findViewById<TextView>(R.id.tvLoginPage)
 
-        // Verifies Email
+        // Validates Email
         etEmail.onFocusChangeListener = View.OnFocusChangeListener {view, hasFocus ->
             val email = etEmail.text.toString()
 
@@ -60,7 +60,7 @@ class SignUpActivity : AppCompatActivity() {
             } else tvErrEmail.visibility = View.GONE
         }
 
-        // Verifies Username
+        // Verifies if username already exists
         etUsername.onFocusChangeListener = View.OnFocusChangeListener {view, hasFocus ->
             val username = etUsername.text.toString()
 
@@ -77,7 +77,7 @@ class SignUpActivity : AppCompatActivity() {
         // Display Calendar
         etBirthdate.setOnClickListener {showDatePickerDialog(etBirthdate)}
 
-        // Verifies Password
+        // Validates Password
         etPassword.onFocusChangeListener = View.OnFocusChangeListener {view, hasFocus ->
             if (!hasFocus) {
                 val pass = etPassword.text.toString().trim()
@@ -115,6 +115,7 @@ class SignUpActivity : AppCompatActivity() {
 
         // Form Submission
         btnSignUp.setOnClickListener {
+            // Variables
             var hasError = false
 
             val name = etFullName.text.toString()
@@ -127,36 +128,41 @@ class SignUpActivity : AppCompatActivity() {
             val user = getSharedPreferences("users", MODE_PRIVATE)
             val cUsername = user.getString(username + "_username", "")
 
+            // Empty Fields
             if (name.isEmpty() || email.isEmpty() || bdate.isEmpty() || username.isEmpty() || pass.isEmpty() || cpass.isEmpty() || rgGender.checkedRadioButtonId == -1) {
                 Toast.makeText(this, R.string.err_required_fields, Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
+            // Existing Username
             if (username == cUsername) {
                 tvErrUsername.visibility = View.VISIBLE
                 hasError = true
             } else tvErrUsername.visibility = View.GONE
 
+            // Invalid Email
             if (!isEmailValid(email)) {
                 tvErrEmail.visibility = View.VISIBLE
                 hasError = true
             } else tvErrEmail.visibility = View.GONE
 
+            // Invalid Password
             if (!isPassValid(pass)) {
                 tvErrPass.visibility = View.VISIBLE
                 hasError = true
             } else tvErrPass.visibility = View.GONE
 
+            // Password Mismatch
             if (cpass != pass) {
                 tvErrPassMatch.visibility = View.VISIBLE
                 hasError = true
             } else tvErrPassMatch.visibility = View.GONE
 
-
             if (hasError) {
                 Toast.makeText(this, R.string.err_invalid_input, Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             } else {
+                // Saving User Data
                 val user = getSharedPreferences("users", MODE_PRIVATE)
 
                 user.edit {

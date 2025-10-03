@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        // Clears Saved User Data
 //        val users = getSharedPreferences("users", MODE_PRIVATE)
 //        users.edit().clear().apply()
 
