@@ -3,9 +3,15 @@
     <item
         android:id="@+id/bnavGallery"
         android:icon="@android:drawable/ic_menu_gallery"
-        android:title="Gallery" />
+        android:title="Gallery"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:gravity="center" />
     <item
         android:id="@+id/bnavLogout"
-        android:icon="@android:drawable/alert_dark_frame"
-        android:title="Logout" />
+        android:icon="@drawable/logout"
+        android:title="Logout"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:gravity="center" />
 </menu>

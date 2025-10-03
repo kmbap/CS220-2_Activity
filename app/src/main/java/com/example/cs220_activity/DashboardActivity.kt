@@ -19,6 +19,6 @@ class DashboardActivity : AppCompatActivity() {
         }
 
         // Redirect to Gallery
-        startActivity(Intent(this@DashboardActivity, GalleryActivity_1::class.java))
+        startActivity(Intent(this@DashboardActivity, GalleryActivity::class.java))
     }
 }

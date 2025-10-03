@@ -16,7 +16,7 @@
             android:exported="false"
             android:label="@string/title_activity_gallery2" />
         <activity
-            android:name=".GalleryActivity_1"
+            android:name=".GalleryActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

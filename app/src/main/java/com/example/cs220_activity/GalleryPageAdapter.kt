@@ -1,10 +1,7 @@
 package com.example.cs220_activity
 
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import android.view.*
+import androidx.recyclerview.widget.*
 
 class GalleryPageAdapter(
     private val imageList: List<GalleryImage>,
@@ -13,9 +10,10 @@ class GalleryPageAdapter(
 
     private val itemsPerPage = 6
     private val pageAdapters = mutableMapOf<Int, GalleryAdapter>()
+    private var listLayout: Boolean = false
 
-    inner class PageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val pageRecyclerView: RecyclerView = itemView.findViewById(R.id.rvGalleryPage)
+    inner class PageViewHolder(imageView: View) : RecyclerView.ViewHolder(imageView) {
+        val pageRecyclerView: RecyclerView = imageView.findViewById(R.id.rvGalleryPage)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PageViewHolder {
@@ -28,12 +26,14 @@ class GalleryPageAdapter(
         val end = minOf(start + itemsPerPage, imageList.size)
         val imageSubList = imageList.subList(start, end)
 
-        val galleryAdapter = GalleryAdapter(imageSubList) { subPosition ->
+        val galleryAdapter = GalleryAdapter(imageSubList, listLayout) { subPosition ->
             onImageClick(start + subPosition)
         }
         pageAdapters[position] = galleryAdapter
 
-        holder.pageRecyclerView.layoutManager = GridLayoutManager(holder.itemView.context, 2, GridLayoutManager.VERTICAL, false)
+        holder.pageRecyclerView.layoutManager =
+            if (listLayout) LinearLayoutManager(holder.itemView.context, LinearLayoutManager.VERTICAL, false)
+            else GridLayoutManager(holder.itemView.context, 2, GridLayoutManager.VERTICAL, false)
         holder.pageRecyclerView.adapter = galleryAdapter
     }
 
@@ -46,5 +46,14 @@ class GalleryPageAdapter(
             adapter.showDesc = show
             adapter.notifyDataSetChanged()
         }
+    }
+
+    fun setListLayout(isList: Boolean) {
+        listLayout = isList
+        for (adapter in pageAdapters.values) {
+            adapter.setListLayout(isList)
+            adapter.notifyDataSetChanged()
+        }
+        notifyDataSetChanged()
     }
 }

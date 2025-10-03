@@ -5,53 +5,56 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GalleryActivity_1">
+    tools:context=".GalleryActivity">
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vpPager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/btnLogout"
-        app:layout_constraintBottom_toTopOf="@+id/tbtnDesc"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_marginHorizontal="5dp"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/bnavMenu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ToggleButton
         android:id="@+id/tbtnDesc"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
         android:backgroundTint="@color/switch_thumb"
         android:checked="false"
         android:textColor="@color/tbtn_text"
         android:textOff="Show Desc"
         android:textOn="Hide Desc"
         android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toTopOf="@id/vpPager"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.750" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switchLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:text="List"
         android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/vpPager"
         app:layout_constraintEnd_toEndOf="parent"
         app:thumbTint="@color/switch_thumb"
-        app:trackTint="@color/arc3" />
+        app:trackTint="@color/arc3"
+        app:layout_constraintVertical_bias="0.750
+"/>
 
-    <Button
-        android:id="@+id/btnLogout"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="10dp"
-        android:text="Logout"
-        android:textSize="15sp"
-        android:backgroundTint="@color/arc1"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bnavMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/bottom_nav_menu"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,17 +2,16 @@ package com.example.cs220_activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import android.widget.ToggleButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.*
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class GalleryActivity_1 : AppCompatActivity() {
+class GalleryActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +26,7 @@ class GalleryActivity_1 : AppCompatActivity() {
         val viewPager = findViewById<ViewPager2>(R.id.vpPager)
         val switchLayout = findViewById<SwitchCompat>(R.id.switchLayout)
         val tbtnDesc = findViewById<ToggleButton>(R.id.tbtnDesc)
-        val btnLogout = findViewById<Button>(R.id.btnLogout)
+        val bnavMenu = findViewById<BottomNavigationView>(R.id.bnavMenu)
 
         val galleryImages = listOf(
             GalleryImage(R.drawable.cady_1, "Happy Cady", "Tuesday, May 20, 2025 | 21:29:21"),
@@ -53,15 +52,12 @@ class GalleryActivity_1 : AppCompatActivity() {
         switchLayout.thumbTintList = ContextCompat.getColorStateList(this, R.color.switch_thumb)
         switchLayout.trackTintList = ContextCompat.getColorStateList(this, R.color.arc3)
 
-//        switchLayout.setOnCheckedChangeListener { _, isChecked ->
-//            if (isChecked) {
-//                rvImageGallery.layoutManager = lmList
-//                switchLayout.text = "Grid"
-//            } else {
-//                rvImageGallery.layoutManager = lmGrid
-//                switchLayout.text = "List"
-//            }
-//        }
+        switchLayout.isChecked = false
+        galleryPageAdapter.setListLayout(false)
+
+        switchLayout.setOnCheckedChangeListener { _, isChecked ->
+            galleryPageAdapter.setListLayout(isChecked)
+        }
 
         tbtnDesc.setOnCheckedChangeListener { _, isChecked ->
             (viewPager.adapter as? GalleryPageAdapter)?.let {
@@ -69,8 +65,18 @@ class GalleryActivity_1 : AppCompatActivity() {
             }
         }
 
-        btnLogout.setOnClickListener {
-            startActivity(Intent(this@GalleryActivity_1, LoginActivity::class.java))
+        bnavMenu.selectedItemId = R.id.bnavGallery
+        bnavMenu.setOnItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.bnavGallery -> { true }
+                R.id.bnavLogout -> {
+                    startActivity(Intent(this, LoginActivity::class.java).apply {
+                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    })
+                    true
+                }
+                else -> false
+            }
         }
     }
 }
