@@ -5,21 +5,16 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GalleryActivity">
+    tools:context=".GalleryActivity_1">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvImageGallery"
-        android:layout_width="393dp"
-        android:layout_height="712dp"
-        android:clipToPadding="false"
-        android:padding="2dp"
-        android:scrollbars="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vpPager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogout"
+        app:layout_constraintBottom_toTopOf="@+id/tbtnDesc"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.943" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <ToggleButton
         android:id="@+id/tbtnDesc"
@@ -32,8 +27,8 @@
         android:textOff="Show Desc"
         android:textOn="Hide Desc"
         android:textSize="10sp"
-        app:layout_constraintBottom_toTopOf="@+id/rvImageGallery"
-        app:layout_constraintStart_toStartOf="@+id/rvImageGallery" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switchLayout"
@@ -42,8 +37,8 @@
         android:layout_marginBottom="4dp"
         android:text="List"
         android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/rvImageGallery"
-        app:layout_constraintEnd_toEndOf="@+id/rvImageGallery"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:thumbTint="@color/switch_thumb"
         app:trackTint="@color/arc3" />
 

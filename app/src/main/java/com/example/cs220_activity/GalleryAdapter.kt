@@ -1,31 +1,32 @@
 package com.example.cs220_activity
 
-import android.view.*
-import android.widget.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class GalleryAdapter(
     private var imageList: List<GalleryImage>,
-    private val onImageClick: (Int) -> Unit)
-    : RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
+    private val onImageClick: (Int) -> Unit
+) : RecyclerView.Adapter<GalleryAdapter.ViewHolder>() {
 
-        var showDesc: Boolean = false
-        var showImg: Boolean = false
+    var showDesc: Boolean = false
+    var showImg: Boolean = false
 
-    // References UI Elements
-    class ViewHolder(imageView: View): RecyclerView.ViewHolder(imageView) {
-        val ivImage: ImageView = imageView.findViewById(R.id.ivImage)
-        val tvDesc: TextView = imageView.findViewById(R.id.tvDesc)
-        val pbarLoading: ProgressBar = imageView.findViewById(R.id.pbarLoading)
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val ivImage: ImageView = itemView.findViewById(R.id.ivImage)
+        val tvDesc: TextView = itemView.findViewById(R.id.tvDesc)
+        val pbarLoading: ProgressBar = itemView.findViewById(R.id.pbarLoading)
     }
 
-    // Sets Layout Of UI Elements
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.gallery_image, parent, false)
         return ViewHolder(view)
     }
 
-    // Sets Values of UI Elements
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val image = imageList[position]
         holder.ivImage.setImageResource(image.imgResId)
@@ -50,12 +51,14 @@ class GalleryAdapter(
             holder.ivImage.requestLayout()
         }
 
-        holder.ivImage.setOnClickListener {
-            onImageClick(position)
+        holder.itemView.setOnClickListener {
+            onImageClick(holder.adapterPosition)
         }
 
-        holder.tvDesc.visibility = if (showDesc) View.VISIBLE else View.INVISIBLE
+        holder.tvDesc.visibility = if (showDesc) View.VISIBLE else View.GONE
     }
 
-    override fun getItemCount(): Int = imageList.size
+    override fun getItemCount(): Int {
+        return imageList.size
+    }
 }
