@@ -1,4 +1,4 @@
-package com.example.cs220_activity
+package com.example.cs220_activity.activity2
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +9,7 @@ import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.*
 import androidx.viewpager2.widget.ViewPager2
+import com.example.cs220_activity.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class GalleryActivity : AppCompatActivity() {

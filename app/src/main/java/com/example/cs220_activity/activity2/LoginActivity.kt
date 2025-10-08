@@ -1,4 +1,4 @@
-package com.example.cs220_activity
+package com.example.cs220_activity.activity2
 
 import android.content.Intent
 import android.os.Bundle
@@ -14,6 +14,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.cs220_activity.DashboardActivity
+import com.example.cs220_activity.R
+import com.example.cs220_activity.activity1.SignUpActivity
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

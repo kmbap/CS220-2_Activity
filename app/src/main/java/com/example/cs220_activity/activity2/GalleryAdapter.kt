@@ -1,8 +1,9 @@
-package com.example.cs220_activity
+package com.example.cs220_activity.activity2
 
 import android.view.*
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
+import com.example.cs220_activity.R
 
 class GalleryAdapter(
     private var imageList: List<GalleryImage>,

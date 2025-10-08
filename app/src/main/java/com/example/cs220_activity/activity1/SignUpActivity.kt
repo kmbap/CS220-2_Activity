@@ -1,19 +1,28 @@
-package com.example.cs220_activity
+package com.example.cs220_activity.activity1
 
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.icu.util.Calendar
 import android.os.Bundle
-import android.text.method.*
-import android.util.*
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
+import android.util.Patterns
 import android.view.View
-import android.widget.*
+import android.widget.Button
+import android.widget.CheckBox
+import android.widget.EditText
+import android.widget.RadioGroup
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.*
+import androidx.core.content.edit
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import com.example.cs220_activity.activity2.LoginActivity
+import com.example.cs220_activity.R
 import java.text.SimpleDateFormat
 import java.util.Locale
-import androidx.core.content.edit
 
 class SignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,7 +59,7 @@ class SignUpActivity : AppCompatActivity() {
         val tvLoginPage = findViewById<TextView>(R.id.tvLoginPage)
 
         // Validates Email
-        etEmail.onFocusChangeListener = View.OnFocusChangeListener {view, hasFocus ->
+        etEmail.onFocusChangeListener = View.OnFocusChangeListener { view, hasFocus ->
             val email = etEmail.text.toString()
 
             if (!hasFocus) {
@@ -61,7 +70,7 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         // Verifies if username already exists
-        etUsername.onFocusChangeListener = View.OnFocusChangeListener {view, hasFocus ->
+        etUsername.onFocusChangeListener = View.OnFocusChangeListener { view, hasFocus ->
             val username = etUsername.text.toString()
 
             val user = getSharedPreferences("users", MODE_PRIVATE)
@@ -78,7 +87,7 @@ class SignUpActivity : AppCompatActivity() {
         etBirthdate.setOnClickListener {showDatePickerDialog(etBirthdate)}
 
         // Validates Password
-        etPassword.onFocusChangeListener = View.OnFocusChangeListener {view, hasFocus ->
+        etPassword.onFocusChangeListener = View.OnFocusChangeListener { view, hasFocus ->
             if (!hasFocus) {
                 val pass = etPassword.text.toString().trim()
 
@@ -99,7 +108,7 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         // Verifies Password Match
-        etCPass.onFocusChangeListener = View.OnFocusChangeListener {view, hasFocus ->
+        etCPass.onFocusChangeListener = View.OnFocusChangeListener { view, hasFocus ->
             if (!hasFocus) {
                 val pass = etPassword.text.toString().trim()
                 val cpass = etCPass.text.toString().trim()

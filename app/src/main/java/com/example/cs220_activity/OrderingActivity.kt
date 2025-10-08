@@ -1,30 +1,20 @@
 package com.example.cs220_activity
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.cs220_activity.activity2.LoginActivity
 
-
-class MainActivity : AppCompatActivity() {
+class OrderingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_ordering)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
-        // Clears Saved User Data
-//        val users = getSharedPreferences("users", MODE_PRIVATE)
-//        users.edit().clear().apply()
-
-        // Redirect to Login Page
-        startActivity(Intent(this@MainActivity, LoginActivity::class.java))
     }
 }

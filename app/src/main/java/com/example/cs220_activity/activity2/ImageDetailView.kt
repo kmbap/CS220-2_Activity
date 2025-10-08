@@ -1,10 +1,11 @@
-package com.example.cs220_activity
+package com.example.cs220_activity.activity2
 
 import android.app.Dialog
 import android.os.Bundle
 import android.view.*
 import android.widget.*
 import androidx.fragment.app.DialogFragment
+import com.example.cs220_activity.R
 
 class ImageDetailView(
     private val images: List<GalleryImage>,
